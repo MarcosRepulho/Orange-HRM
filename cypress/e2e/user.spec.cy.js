@@ -9,9 +9,13 @@ describe('Orange HRM Tests', () => {
         sectionTitleTopBar:".oxd-topbar-header-breadcrumb-module",
         dashboardGrid: ".orangehrm-dashboard-grid",
         wrongCredentialsAlert:"[role='alert']",
+        myInfoButton: "[href='/web/index.php/pim/viewMyDetails']",
+        firstNameField: "[name='firstName']",
+        lastNameField: "[name='lastName']",
+        nickNameField: ".oxd-input--active",
       }
       
-  it('Login - Success', () => {
+  it.only('User Info Update - Success', () => {
     
     cy.visit('/auth/login')
     cy.get( selectorsList.usernameField).type(userData.userSucess.username)
@@ -19,7 +23,11 @@ describe('Orange HRM Tests', () => {
     cy.get(selectorsList.loginButton).click()
     cy.location('pathname').should('equal','/web/index.php/dashboard/index')
     cy.get(selectorsList.dashboardGrid)
+    cy.get(selectorsList.myInfoButton).click()
+    cy.get(selectorsList.nickNameField).eq(4).type('Juninho')
+    cy.get(selectorsList.firstNameField).type('Junior Oliveira')
   })
+  
   it('Login - Fail', () => {
     cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')
     cy.get(selectorsList.usernameField).type(userData.userFail.username)
