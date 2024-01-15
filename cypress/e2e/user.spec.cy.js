@@ -37,9 +37,15 @@ describe('Orange HRM Tests', () => {
     cy.get(selectorsList.dateCloseButton).click()
     cy.get(selectorsList.genericField).eq(8).clear().type('SSnNumberTest')
     cy.get(selectorsList.genericField).eq(9).clear().type('sinNumberTest')
-    cy.get(selectorsList.submitButton).eq(0).click()
+    cy.get(selectorsList.submitButton).eq(0).click({force: true })
     cy.get('body').should('contain', 'Successfully Updated')
     cy.get('.oxd-toast-close')
+    
+    cy.get(':nth-child(5) > :nth-child(1) > :nth-child(1) > .oxd-input-group > :nth-child(2) > .oxd-select-wrapper > .oxd-select-text').click({force: true })
+    cy.get('.oxd-select-dropdown > :nth-child(15)').click()
+    cy.get(':nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-select-wrapper > .oxd-select-text > .oxd-select-text-input').click({force: true })
+    cy.get(':nth-child(4) > span').click()
+
   })
   
   it('Login - Fail', () => {
