@@ -12,7 +12,10 @@ describe('Orange HRM Tests', () => {
         myInfoButton: "[href='/web/index.php/pim/viewMyDetails']",
         firstNameField: "[name='firstName']",
         lastNameField: "[name='lastName']",
-        nickNameField: ".oxd-input--active",
+        genericField: ".oxd-input--active",
+        dateField: "[placeholder='yyyy-mm-dd']",
+        dateCloseButton: ".--close",
+        submitButton: "[type='submit']",
       }
       
   it.only('User Info Update - Success', () => {
@@ -24,8 +27,19 @@ describe('Orange HRM Tests', () => {
     cy.location('pathname').should('equal','/web/index.php/dashboard/index')
     cy.get(selectorsList.dashboardGrid)
     cy.get(selectorsList.myInfoButton).click()
-    cy.get(selectorsList.nickNameField).eq(4).type('Juninho')
-    cy.get(selectorsList.firstNameField).type('Junior Oliveira')
+    cy.get(selectorsList.firstNameField).clear().type('Junior Oliveira')
+    cy.get(selectorsList.lastNameField).clear().type('Magalhoes')
+    cy.get(selectorsList.genericField).eq(3).clear().clear().type('Juninho')
+    cy.get(selectorsList.genericField).eq(4).clear().type('Employee')
+    cy.get(selectorsList.genericField).eq(5).clear().type('OtherIDTest')
+    cy.get(selectorsList.genericField).eq(6).clear().type('DriversLicenseTest')
+    cy.get(selectorsList.genericField).eq(7).clear().type('2025-03-10')
+    cy.get(selectorsList.dateCloseButton).click()
+    cy.get(selectorsList.genericField).eq(8).clear().type('SSnNumberTest')
+    cy.get(selectorsList.genericField).eq(9).clear().type('sinNumberTest')
+    cy.get(selectorsList.submitButton).eq(0).click()
+    cy.get('body').should('contain', 'Successfully Updated')
+    cy.get('.oxd-toast-close')
   })
   
   it('Login - Fail', () => {
