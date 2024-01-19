@@ -15,7 +15,7 @@ describe('Orange HRM Tests', () => {
         
       }
       
-  it.only('User Info Update - Success', () => {
+  it('User Info Update - Success', () => {
     loginPage.accessLoginPage()
     loginPage.loginWithAnyUser(userData.userSucess.username, userData.userSucess.password)
     dashboardPage.checkDashboardPage()
@@ -31,10 +31,8 @@ describe('Orange HRM Tests', () => {
   })
   
   it('Login - Fail', () => {
-    cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')
-    cy.get(selectorsList.usernameField).type(userData.userFail.username)
-    cy.get(selectorsList.passwordField).type(userData.userFail.password)
-    cy.get(selectorsList.loginButton).click()
-    cy.get(selectorsList.wrongCredentialsAlert)
+    loginPage.accessLoginPage()
+    loginPage.loginWithAnyUser(userData.userFail.username, userData.userFail.password)
+    loginPage.checkAcessInvalid()
   })
 })
