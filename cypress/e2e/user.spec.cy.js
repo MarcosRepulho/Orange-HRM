@@ -29,9 +29,11 @@ describe('Orange HRM Tests', () => {
     myInfoPage.fillStatus()
     myInfoPage.saveform()
   
-
   })
   
-  
-  
+  it('Login - Fail', () => {
+    loginPage.accessLoginPage()
+    loginPage.loginWithAnyUser(userData.userFail.username, userData.userFail.password)
+    loginPage.checkAcessInvalid()
+  })
 })
