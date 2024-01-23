@@ -10,5 +10,8 @@
   "license": "ISC",
   "devDependencies": {
     "cypress": "^13.6.2"
+  },
+  "dependencies": {
+    "chance": "^1.1.11"
   }
 }
